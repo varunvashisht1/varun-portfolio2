@@ -5,34 +5,34 @@
 
 :root {
   /* Surfaces */
-  --bg: #faf8f3;          /* warm off-white */
-  --bg-2: #ffffff;        /* card surface */
-  --bg-3: #f3f0e8;        /* subtle alt */
-  --bg-dark: #0a1f3d;     /* navy reserved for hero overlays */
+  --bg: #0f172a;          /* deep slate */
+  --bg-2: #1e293b;        /* card surface */
+  --bg-3: #1e293b;        /* subtle alt */
+  --bg-dark: #020617;     /* darkest slate */
 
   /* Text */
-  --text: #0a1f3d;        /* deep navy */
-  --text-soft: #475569;   /* slate */
-  --text-mute: #64748b;   /* cool gray */
-  --text-quiet: #94a3b8;
-  --on-dark: #f5f0e3;     /* cream on navy */
-  --on-dark-soft: #d4d8e0;
+  --text: #f8fafc;        /* pure white */
+  --text-soft: #cbd5e1;   /* light slate */
+  --text-mute: #94a3b8;   /* cool gray */
+  --text-quiet: #64748b;
+  --on-dark: #f8fafc;     /* text on dark */
+  --on-dark-soft: #cbd5e1;
 
   /* Accents */
-  --accent: #1e4d8c;      /* steel blue */
-  --accent-soft: #3b6ba8;
-  --gold: #b8965a;        /* muted gold */
-  --gold-soft: #c9a961;
+  --accent: #10b981;      /* emerald green */
+  --accent-soft: #34d399;
+  --gold: #10b981;        /* emerald (mapped from gold for compatibility) */
+  --gold-soft: #34d399;   /* soft emerald */
 
   /* Borders */
-  --border: #e5e1d6;
-  --border-strong: #cfc8b4;
-  --hairline: rgba(10, 31, 61, 0.08);
+  --border: #334155;
+  --border-strong: #475569;
+  --hairline: rgba(255, 255, 255, 0.05);
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(10, 31, 61, 0.04), 0 1px 1px rgba(10, 31, 61, 0.03);
-  --shadow-md: 0 4px 14px rgba(10, 31, 61, 0.06), 0 2px 4px rgba(10, 31, 61, 0.04);
-  --shadow-lg: 0 22px 48px -16px rgba(10, 31, 61, 0.18), 0 8px 16px rgba(10, 31, 61, 0.06);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 22px 48px -16px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.4);
 
   --radius: 12px;
   --radius-sm: 8px;
@@ -995,3 +995,102 @@ em { font-style: italic; color: var(--text-soft); }
   .container { padding: 0 22px; }
   .stats { padding: 30px 0 60px; }
 }
+
+/* ========== METHODOLOGY ========== */
+.methodology { background: var(--bg); }
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.method-step {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  position: relative;
+  transition: all 0.4s var(--t);
+  display: flex;
+  flex-direction: column;
+}
+.method-step:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.step-num {
+  font-family: "Fraunces", serif;
+  font-size: 48px;
+  font-weight: 500;
+  color: var(--accent);
+  opacity: 0.2;
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  line-height: 1;
+}
+.method-step h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  z-index: 1;
+}
+.method-step p {
+  font-size: 14.5px;
+  color: var(--text-soft);
+  z-index: 1;
+  margin: 0;
+}
+
+/* ========== GALLERY ========== */
+.gallery { background: var(--bg-3); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s var(--t);
+  background: var(--bg-dark);
+}
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--t), filter 0.6s var(--t);
+  filter: brightness(0.85);
+}
+.gallery-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(1);
+}
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 16px;
+  background: linear-gradient(transparent, rgba(2, 6, 23, 0.9));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s var(--t);
+}
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
