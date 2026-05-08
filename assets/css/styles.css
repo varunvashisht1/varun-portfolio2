@@ -5,18 +5,18 @@
 
 :root {
   /* Surfaces */
-  --bg: #0f172a;          /* deep slate */
-  --bg-2: #1e293b;        /* card surface */
-  --bg-3: #1e293b;        /* subtle alt */
-  --bg-dark: #020617;     /* darkest slate */
+  --bg: #121212;          /* neutral true dark */
+  --bg-2: #1e1e1e;        /* card surface */
+  --bg-3: #181818;        /* subtle alt */
+  --bg-dark: #0a0a0a;     /* darkest neutral */
 
   /* Text */
-  --text: #f8fafc;        /* pure white */
-  --text-soft: #cbd5e1;   /* light slate */
-  --text-mute: #94a3b8;   /* cool gray */
-  --text-quiet: #64748b;
-  --on-dark: #f8fafc;     /* text on dark */
-  --on-dark-soft: #cbd5e1;
+  --text: #ffffff;        /* pure white */
+  --text-soft: #a3a3a3;   /* medium gray */
+  --text-mute: #737373;   /* darker gray */
+  --text-quiet: #525252;
+  --on-dark: #ffffff;     /* text on dark */
+  --on-dark-soft: #d4d4d4;
 
   /* Accents */
   --accent: #10b981;      /* emerald green */
@@ -25,8 +25,8 @@
   --gold-soft: #34d399;   /* soft emerald */
 
   /* Borders */
-  --border: #334155;
-  --border-strong: #475569;
+  --border: #262626;
+  --border-strong: #404040;
   --hairline: rgba(255, 255, 255, 0.05);
 
   /* Shadows */
@@ -304,18 +304,18 @@ em { font-style: italic; color: var(--text-soft); }
   height: 100%;
   object-fit: cover;
   filter: grayscale(0.2) brightness(0.55);
-  animation: heroPan 24s ease-in-out infinite alternate;
+  animation: heroPan 14s ease-in-out infinite alternate;
 }
 @keyframes heroPan {
   from { transform: scale(1.05) translate(0, 0); }
-  to   { transform: scale(1.12) translate(-1.5%, -1.5%); }
+  to   { transform: scale(1.15) translate(-2%, -2%); }
 }
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(10, 31, 61, 0.55) 0%, rgba(10, 31, 61, 0.85) 100%),
-    radial-gradient(60% 80% at 30% 50%, rgba(10, 31, 61, 0.3), transparent);
+    linear-gradient(180deg, rgba(10, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0.9) 100%),
+    radial-gradient(60% 80% at 30% 50%, rgba(10, 10, 10, 0.4), transparent);
 }
 .hero-content {
   position: relative;
