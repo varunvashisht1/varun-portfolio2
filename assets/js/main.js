@@ -156,8 +156,8 @@ function handleContact(e) {
   note.className = 'form-note';
 
   emailjs.send(window.EMAILJS_SERVICE_ID, window.EMAILJS_TEMPLATE_ID, {
-    from_name: name,
-    from_email: email,
+    name: name,
+    email: email,
     message: message
   }).then(() => {
     note.textContent = "Message sent! I'll be in touch soon.";
