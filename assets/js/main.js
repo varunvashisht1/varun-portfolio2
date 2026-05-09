@@ -1,13 +1,3 @@
-/* =================================================================
-   Varun Vashisht — Portfolio Interactions (restrained, professional)
-   - Sticky nav state
-   - Mobile nav toggle
-   - Scroll reveal
-   - Counter animation
-   - Smooth-scroll offset
-   - Mailto contact form
-   ================================================================= */
-
 (() => {
   'use strict';
 
@@ -92,9 +82,44 @@
     });
   });
 
+  /* ---------- Case Study Modals ---------- */
+  let lastFocusedEl = null;
+
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    lastFocusedEl = document.activeElement;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length) focusable[0].focus();
+  }
+
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocusedEl) lastFocusedEl.focus();
+  }
+
+  document.querySelectorAll('[data-open-modal]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.openModal));
+  });
+
+  document.querySelectorAll('[data-modal-close]').forEach(el => {
+    el.addEventListener('click', () => closeModal(el.closest('.modal')));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const open = document.querySelector('.modal:not([hidden])');
+      if (open) closeModal(open);
+    }
+  });
+
 })();
 
-/* ---------- Contact form (mailto, no backend) ---------- */
+/* ---------- Contact form ---------- */
 function handleContact(e) {
   e.preventDefault();
   const form = e.target;
@@ -102,14 +127,50 @@ function handleContact(e) {
   const email = form.email.value.trim();
   const message = form.message.value.trim();
   const note = document.getElementById('form-note');
+  const btn = form.querySelector('button[type="submit"]');
+  const btnLabel = btn.querySelector('span');
+
   if (!name || !email || !message) {
     note.textContent = 'Please fill in all fields.';
+    note.className = 'form-note';
     return false;
   }
-  const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
-  const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
-  window.location.href = `mailto:varun.vashisht@live.com?subject=${subject}&body=${body}`;
-  note.textContent = 'Opening your email client…';
-  note.classList.add('success');
+
+  const configured =
+    typeof emailjs !== 'undefined' &&
+    window.EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
+
+  if (!configured) {
+    /* Fallback: open mail client if EmailJS not yet configured */
+    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name}\n${email}`);
+    window.location.href = `mailto:varun.vashisht@live.com?subject=${subject}&body=${body}`;
+    note.textContent = 'Opening your email client…';
+    note.className = 'form-note success';
+    return false;
+  }
+
+  btn.disabled = true;
+  btnLabel.textContent = 'Sending…';
+  note.textContent = '';
+  note.className = 'form-note';
+
+  emailjs.send(window.EMAILJS_SERVICE_ID, window.EMAILJS_TEMPLATE_ID, {
+    from_name: name,
+    from_email: email,
+    message: message
+  }).then(() => {
+    note.textContent = "Message sent! I'll be in touch soon.";
+    note.className = 'form-note success';
+    form.reset();
+    btn.disabled = false;
+    btnLabel.textContent = 'Send message';
+  }).catch(() => {
+    note.textContent = 'Something went wrong. Please email me directly at varun.vashisht@live.com';
+    note.className = 'form-note';
+    btn.disabled = false;
+    btnLabel.textContent = 'Send message';
+  });
+
   return false;
 }
