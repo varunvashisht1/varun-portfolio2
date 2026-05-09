@@ -1,0 +1,85 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'Varun Vashisht — Senior Program Manager | TPM | Business Architect',
+  description = 'Senior Program Manager, Technical Program Manager, and Business Architect with 14+ years driving enterprise digital transformation, PMO governance, and AI-enabled delivery.',
+  ogImage = 'media/og-image.jpg',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Varun Vashisht" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:url" content="https://varunvashisht1.github.io/varun-portfolio2/" />
+  <meta property="og:site_name" content="Varun Vashisht Portfolio" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <link rel="canonical" href="https://varunvashisht1.github.io/varun-portfolio2/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Varun Vashisht",
+    "jobTitle": "Senior Program Manager",
+    "description": "Senior Program Manager, TPM, and Business Architect with 14+ years driving enterprise digital transformation.",
+    "url": "https://varunvashisht1.github.io/varun-portfolio2/",
+    "email": "mailto:varun.vashisht@live.com",
+    "telephone": "+91-8800426407",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Faridabad",
+      "addressRegion": "Delhi NCR",
+      "postalCode": "121004",
+      "addressCountry": "IN"
+    },
+    "sameAs": ["https://www.linkedin.com/in/varunvashisht1/"],
+    "knowsAbout": ["Program Management","Business Analysis","Agile","SAFe","Microsoft Dynamics 365","Power BI","Azure DevOps","Generative AI","SQL","Python"]
+  }
+  </script>
+
+  <!-- Plausible Analytics — privacy-friendly, no cookies -->
+  <script is:inline defer data-domain="YOUR-DOMAIN.COM" src="https://plausible.io/js/script.js"></script>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230a1f3d'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='Georgia,serif' font-size='32' font-weight='700' fill='%23c9a961'%3EVV%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/varun-portfolio2/assets/css/styles.css" />
+  <script is:inline type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Netlify Identity redirect -->
+  <script is:inline>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <slot />
+</body>
+</html>
